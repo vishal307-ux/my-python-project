@@ -30,10 +30,18 @@ pipeline{
                 
             }
         }
+        stage('Install Python and Pip') {
+            steps {
+                sh '''
+                    sudo apt-get update
+                    sudo apt-get install -y python3 python3-pip
+                '''
+            }
+        }
         stage('Install Dependencies') {
             steps {
                 echo 'Installing dependencies...'
-                sh 'pip install -r path/to/requirements.txt'
+                sh 'pip install -r requirements.txt'
             }
         }
         stage('Build and Push Docker Image') {
