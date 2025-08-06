@@ -40,6 +40,7 @@ pipeline{
             steps {
                 script {
                 // Build Docker image from the app's Dockerfile
+                    sh 'ls -al'
                     sh 'cd my-python-project && docker build -t ${DOCKER_IMAGE} .'
 
                     // Push the Docker image to the registry
