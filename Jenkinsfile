@@ -3,7 +3,8 @@ pipeline{
     environment {
             // Docker image details
             DOCKER_REGISTRY = 'vishalcloud307'                    // Docker Hub registry username
-            IMAGE_NAME = 'myapp'                           // Docker image name
+            IMAGE_NAME = 'myapp'
+            KUBECONFIG = '/var/lib/jenkins/.kube/config'               // Docker image name
             // K8S_CLUSTER = 'minikube'                               // Minikube context name
             // K8S_NAMESPACE = 'default'                              // Kubernetes namespace
 
@@ -49,6 +50,14 @@ pipeline{
                             dockerImage.push()
                      }
                 }
+            }
+        }
+        stage('Deploy to Minikube') {
+            steps {
+                sh '''
+                    kubectl get nodes
+                    kubectl apply -f your-deployment.yaml
+                '''
             }
         }
     }
